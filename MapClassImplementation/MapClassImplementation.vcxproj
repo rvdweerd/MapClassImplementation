@@ -126,6 +126,7 @@
     <ClInclude Include="ArrayMap.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArrayMap.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
