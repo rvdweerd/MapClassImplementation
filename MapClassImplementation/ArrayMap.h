@@ -13,6 +13,13 @@ public:
 	void Put(const KeyType key, const ValueType val);
 	ValueType Get(const KeyType key) const;
 	bool ContainsKey(const KeyType key) const;
+	ValueType& operator[](const KeyType& key)
+	{
+		//ValueType val = entries[FindKey(key)].value;
+		//Put(key, ValueType(0) );
+		//return val;
+		return entries[FindKey(key)].value;
+	}
 
 private:
 	void ExpandCapacity();

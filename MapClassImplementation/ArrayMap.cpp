@@ -56,7 +56,7 @@ void ArrayMap<KeyType, ValueType>::Put(const KeyType key, const ValueType val)
 	}
 	else
 	{
-		entries[index] = { key , val };
+		//entries[index] = { key , val };
 	}
 }
 
