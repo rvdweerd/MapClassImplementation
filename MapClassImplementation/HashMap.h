@@ -41,9 +41,22 @@ public:
 		{
 			if (pCell->link == nullptr)
 			{
-				for ( ; bucketIndex < nBuckets && buckets[bucketIndex] == nullptr; bucketIndex++)
+				if (bucketIndex == nBuckets - 1) //end of bucket array
 				{
-
+					pCell = nullptr;
+				}
+				else
+				{
+					pCell = nullptr;
+					bucketIndex++;
+					for (; (bucketIndex < nBuckets); bucketIndex++)
+					{
+						if (buckets[bucketIndex] != nullptr)
+						{
+							pCell = buckets[bucketIndex];
+							break;
+						}
+					}
 				}
 			}
 			else
@@ -52,13 +65,17 @@ public:
 			}
 			return *this;
 		}
-		ValuePair& operator*()
+		Cell& operator*()
 		{
-			return *pValuePair;
+			return *pCell;
 		}
 		bool operator!=(Iterator rhs) const
 		{
-			return pValuePair != rhs.pValuePair;
+			return pCell != rhs.pCell;
+		}
+		Cell* Get()
+		{
+			return pCell;
 		}
 	private:
 		Cell* pCell = nullptr;
@@ -103,9 +120,10 @@ public:
 		buckets = nullptr;
 		std::cout << "buckets array deleted, dtor completed\n";
 	}
-	void Put(KeyType key, ValueType val)
+	void Put(KeyType key, ValueType val, int index)
 	{
-		int bucketIndex = HashCode(key) % nBuckets;
+		//int bucketIndex = HashCode(key) % nBuckets;
+		int bucketIndex = index;
 		if (buckets[bucketIndex] == nullptr)
 		{
 			buckets[bucketIndex] = new Cell(key, val, nullptr);
@@ -122,11 +140,16 @@ public:
 	}
 	Iterator begin()
 	{
-		return Iterator(...);
+		int i = 0;
+		for (; i < nBuckets && buckets[i] == nullptr; i++);
+		return Iterator(buckets[i], buckets, nBuckets, 0);
 	}
 	Iterator end()
 	{
-		return Iterator(...);
+		Cell* pLastCell = nullptr;
+		Iterator iter = begin();
+		for (; iter.Get() != nullptr; pLastCell = iter.Get(), ++iter);
+		return Iterator(pLastCell,buckets,nBuckets,nBuckets-1);
 	}
 
 private:
