@@ -48,8 +48,8 @@ public:
 				else
 				{
 					pCell = nullptr;
-					bucketIndex++;
-					for (; (bucketIndex < nBuckets); bucketIndex++)
+					//bucketIndex++;
+					for (; (++bucketIndex < nBuckets); )//bucketIndex++)
 					{
 						if (buckets[bucketIndex] != nullptr)
 						{
@@ -120,10 +120,10 @@ public:
 		buckets = nullptr;
 		std::cout << "buckets array deleted, dtor completed\n";
 	}
-	void Put(KeyType key, ValueType val, int index)
+	void Put(KeyType key, ValueType val)
 	{
-		//int bucketIndex = HashCode(key) % nBuckets;
-		int bucketIndex = index;
+		int bucketIndex = HashCode(key) % nBuckets;
+		//int bucketIndex = index;
 		if (buckets[bucketIndex] == nullptr)
 		{
 			buckets[bucketIndex] = new Cell(key, val, nullptr);
@@ -142,14 +142,15 @@ public:
 	{
 		int i = 0;
 		for (; i < nBuckets && buckets[i] == nullptr; i++);
-		return Iterator(buckets[i], buckets, nBuckets, 0);
+		return Iterator(buckets[i], buckets, nBuckets, i);
 	}
 	Iterator end()
 	{
-		Cell* pLastCell = nullptr;
-		Iterator iter = begin();
-		for (; iter.Get() != nullptr; pLastCell = iter.Get(), ++iter);
-		return Iterator(pLastCell,buckets,nBuckets,nBuckets-1);
+		//Cell* pLastCell = nullptr;
+		//Iterator iter = begin();
+		//for (; iter.Get() != nullptr; pLastCell = iter.Get(), ++iter);
+		//return Iterator(pLastCell,buckets,nBuckets,nBuckets-1);
+		return Iterator(nullptr , buckets, nBuckets, nBuckets - 1);
 	}
 
 private:
