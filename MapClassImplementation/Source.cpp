@@ -1,6 +1,6 @@
 #pragma once
 #include "ArrayMap.h"
-//#include <string>
+#include "HashMap.h"
 #include <iostream>
 
 
@@ -15,6 +15,13 @@ int main()
 		std::cout << v.key << "," << v.value<<std::endl;
 	}
 
+	{
+		HashMap<int, int> hmap(12);
+		for (int i = 1; i < 10; i++)
+		{
+			hmap.Put(i, i * 10);
+		}
+	}
 	//std::cout << "Value for key 2 = " << map.Get(2) << std::endl;
 	//std::cout << "Size of map = " << map.Size() << std::endl;
 	//std::cout << "Map contains key 1 = " << map.ContainsKey(1) << std::endl;

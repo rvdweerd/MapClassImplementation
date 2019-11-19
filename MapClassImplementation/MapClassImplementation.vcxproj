@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ArrayMap.h" />
+    <ClInclude Include="HashMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArrayMap.cpp" />
