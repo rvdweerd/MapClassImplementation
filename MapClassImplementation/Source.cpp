@@ -3,56 +3,74 @@
 #include "HashMap.h"
 #include <iostream>
 
+template<typename ValueType>
+void PrintMap(ArrayMap<std::pair<int,int>,ValueType>& map)
+{
+	for (auto c : map)
+	{
+		std::cout <<"(("<<c.key.first << ","<<c.key.second<<")," << c.value<<"),";
+	}
+}
+
+template<typename ValueType>
+void PrintMap(ArrayMap<int, ValueType>& map)
+{
+	for (auto c : map)
+	{
+		std::cout << "(" << c.key << "," << c.value << "),";
+	}
+}
+
+template<typename ValueType>
+void PrintMap(HashMap<std::pair<int,int>, ValueType>& map)
+{
+	for (auto c : map)
+	{
+		std::cout << "((" << c.key.first << "," << c.key.second << ")," << c.val << "),";
+	}
+}
+
+template<typename ValueType>
+void PrintMap(HashMap<int, ValueType>& map)
+{
+	for (auto c : map)
+	{
+		std::cout << "(" << c.key << "," << c.val << "),";
+	}
+}
 
 int main()
 {
-	ArrayMap<int, int> map;
-	map.Put(1, 100);
-	map.Put(2, 200);
-
-	for (auto v : map)
 	{
-		std::cout << v.key << "," << v.value << std::endl;
+		//ArrayMap<std::pair<int,int>, int> map;
+		ArrayMap<int, int> map;
+		//for (int i = 1; i < 1000000; i++)
+		//map.Put({ 2,3 },  10);
+		map.Put( 2, 10);
+		PrintMap(map);
+		std::cout << "\nNumber of cells: " << map.Size() << std::endl;
 	}
-
+	std::cin.get();
 	{
-		HashMap<int, int> hmap(12);
-		for (int i = 1; i < 10; i++)
-		{
-			hmap.Put(i, i * 10);
-		}
+		HashMap<std::pair<int, int>, int> hmap(2);
+		//HashMap<int, int> hmap(120);
+		//for (int i = 1; i < 100; i++)
+		//{
+		//	hmap.Put(i, i * 10);
+		//}
+		hmap.Put({ 20,30 }, 100);
+		hmap.Put({ 20,30 }, 200);
+		hmap.Put({ 10,0 }, 300);
+		hmap.Put({ 0,0 }, 400);
 
-
-		for (auto v : hmap)
-		{
-			std::cout << v.key << "," << v.val << std::endl;
-		}
+		PrintMap(hmap);
+		std::cout << "\nNumber of cells: " << hmap.Size()<<std::endl;
+		std::cin.get();
 		
-		/*
-		auto iter = hmap.begin();
-		for (; iter != hmap.end(); ++iter)
-		{
-			std::cout << iter.Get()->key << "," << iter.Get()->val << std::endl;
-		}
-		*/
+		std::cout << "entry for {20,30}:  " << hmap.Get({ 20,30 }) << std::endl;
+		std::cout << "entry for {0,0}:  " << hmap.Get({ 0,0 }) << std::endl;
+
 	}
-	//std::cout << iter.Get()->key << "," << iter.Get()->val << std::endl;
-
-	//std::cout << "Value for key 2 = " << map.Get(2) << std::endl;
-	//std::cout << "Size of map = " << map.Size() << std::endl;
-	//std::cout << "Map contains key 1 = " << map.ContainsKey(1) << std::endl;
-
-	//map.Put(2, 300);
-	//std::cout << "Put another value for key 2\n";
-	//std::cout << "Value for key 2 = " << map.Get(2) << std::endl;
-	//std::cout << "Size of map = " << map.Size() << std::endl;
-	//std::cout << "Map contains key 1 = " << map.ContainsKey(1) << std::endl;
-
-	//map.Clear();
-	//std::cout << "Map cleared\n";
-	//std::cout << "Value for key 2 = " << map.Get(2) << std::endl;
-	//std::cout << "Size of map = " << map.Size() << std::endl;
-	//std::cout << "Map contains key 1 = " << map.ContainsKey(1) << std::endl;
 
 	std::cin.get();
 	return 0;

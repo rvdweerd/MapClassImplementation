@@ -17,7 +17,8 @@ ArrayMap<KeyType, ValueType>::ArrayMap()
 template <typename KeyType, typename ValueType>
 ArrayMap<KeyType, ValueType>::~ArrayMap()
 {
-	delete entries;
+	delete[] entries;
+	std::cout << "Entries destructed\n";
 	entries = nullptr;
 	nCapacity = 0;
 	nEntries = 0;
@@ -92,13 +93,16 @@ void ArrayMap<KeyType, ValueType>::ExpandCapacity()
 {
 	ValuePair* entries_old = entries;
 	nCapacity *= 2;
+	std::cout << "Capacity of container expanded to: " << nCapacity << "\n";
 	entries = new ValuePair[nCapacity];
 	for (int i = 0; i < nEntries; i++)
 	{
 		entries[i] = entries_old[i];
 	}
-	delete entries_old;
+	delete[] entries_old;
 	entries_old = nullptr;
+	std::cout << "Deep copy completed.\n";
+
 }
 
 template <typename KeyType, typename ValueType>

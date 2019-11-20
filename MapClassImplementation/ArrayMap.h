@@ -13,7 +13,7 @@ public:
 			key(k),
 			value(v)
 		{}
-		KeyType key=0;
+		KeyType key=KeyType();
 		ValueType value=0;
 	};
 public:
