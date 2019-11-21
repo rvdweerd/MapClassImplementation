@@ -171,7 +171,6 @@ public:
 	void Put(KeyType key, ValueType val)
 	{
 		int bucketIndex = HashCode(key) % nBuckets;
-		//int bucketIndex = index;
 		if (buckets[bucketIndex] == nullptr)
 		{
 			buckets[bucketIndex] = new Cell(key, val, nullptr);
@@ -179,7 +178,8 @@ public:
 		}
 		else
 		{
-			if (FindKey(key) == nullptr) //findkey and check if already present.
+			Cell* pKey = FindKey(key);
+			if (pKey == nullptr) //findkey and check if already present.
 			{
 				Cell* pRunner = buckets[bucketIndex];
 				while (pRunner->link != nullptr)
@@ -188,6 +188,10 @@ public:
 				}
 				pRunner->link = new Cell(key, val, nullptr);
 				nCells++;
+			}
+			else
+			{
+				pKey->val = val;
 			}
 		}
 	}
@@ -203,6 +207,10 @@ public:
 		{
 			return pTarget->val;
 		}
+	}
+	ValueType& operator[](const KeyType& key)
+	{
+		return FindKey(key)->val;
 	}
 	Cell* FindKey(KeyType key)
 	{
