@@ -1,5 +1,5 @@
 # MapClassImplementation
-Own implementation of map class
+Own implementation of map class (instructional material from Stanford's CS106B "Programming Abstractions", Roberts, Zelenski.
 
 Based on dynamic array which doubles capacity when needed.</br>
 
