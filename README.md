@@ -1,7 +1,7 @@
 # MapClassImplementation
 Own implementation of map class (instructional material from Stanford's CS106B "Programming Abstractions", Roberts, Zelenski.
 
-ArrayMap.h version:
+<ins>ArrayMap.h version:</ins>
 Based on dynamic array which doubles capacity when needed.</br>
 
 Features implemented:
@@ -16,5 +16,7 @@ Features to be implemented:
 Functionality to be checked:
 * Behavior when calling map.at() vs. map[] (compare with std::map<>)
 
-HashMap.h version:
-Map class implementation using a hashmap, will ammortize to O(1) when load factor <1.
+<ins>HashMap.h version:</ins>
+Map class implementation using a hashmap, will ammortize to O(1) when load factor <1.</br>
+
+Interface same as above (work-in-progress)
